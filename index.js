@@ -3,7 +3,8 @@ import "./style.css";
 
 // Write Javascript code!
 const appDiv = document.getElementById("app");
-const sourceSting = "aaabbdcccccf";
+const logDiv = document.getElementById("log");
+const sourceSting = "aaabbdcccccff";
 const destString = convertStringintoNewFormat(sourceSting);
 const destString1 = convertStringintoNewFormat("aabbaa");
 appDiv.innerHTML = destString + "            ,        " + destString1;
@@ -18,21 +19,24 @@ function convertStringintoNewFormat(source) {
   let count = 1;
   return sourceArray
     .reduce((all, element) => {
-      if (preElement !== element && count === 1) {
-        if (preElement === "") {
+      if (preElement != element && count == 1) {
+        if (preElement == "") {
           all.push(element);
         } else {
           all.push(count);
           all.push(element);
-          if (element === lastElement) {
-            
-          }
+          logDiv.innerHTML += count;
         }
-      } else if (preElement === element) {
+      } else if (preElement == element) {
         count++;
-      } else if (preElement !== element && count !== 1) {
+        logDiv.innerHTML += count;
+      } else if (preElement != element && count > 1) {
         all.push(count);
+        logDiv.innerHTML += count;
         all.push(element);
+        if (lastElement == element) {
+          all.push(count);
+        }
         count = 1;
       }
       preElement = element;
